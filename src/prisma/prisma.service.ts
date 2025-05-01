@@ -1,5 +1,5 @@
 import { Injectable, OnModuleInit, INestApplication, Logger } from '@nestjs/common';
-import { PrismaClient } from '@prisma/client';
+import { PrismaClient } from '../prismacliente/db1'; // <--- IMPORTANTE: Cambia la ruta aquí
 
 @Injectable()
 export class PrismaService extends PrismaClient implements OnModuleInit {
@@ -8,7 +8,6 @@ export class PrismaService extends PrismaClient implements OnModuleInit {
 
   async onModuleInit(): Promise<void> {
     await this.$connect();
-
   }
 
   async enableGracefulShutdown(app: INestApplication): Promise<void> {
@@ -21,7 +20,6 @@ export class PrismaService extends PrismaClient implements OnModuleInit {
     try {
       await this.$disconnect();
       await app.close();
-
     } catch (error: unknown) {
       this.logger.error(PrismaService.ERROR_SHUTDOWN, {
         error: error instanceof Error ? error.message : String(error)

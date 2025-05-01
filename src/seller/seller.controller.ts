@@ -3,11 +3,11 @@ import { SellerService } from './seller.service';
 import { CreateSellerDto } from './dto/create-seller.dto';
 import { UpdateSellerDto } from './dto/update-seller.dto';
 
-@Controller()
+@Controller('seller') // He añadido un prefijo de ruta para este controlador
 export class SellerController {
   constructor(private readonly sellerService: SellerService) {}
 
-  @Post("prefix")
+  @Post() // He corregido el prefijo de la ruta aquí también, si es necesario
   create(@Body() createSellerDto: CreateSellerDto) {
     return this.sellerService.create(createSellerDto);
   }
@@ -29,6 +29,6 @@ export class SellerController {
 
   @Delete(':id')
   remove(@Param('id') id: string) {
-    return this.userService.remove(+id);
+    return this.sellerService.remove(+id); // Corregido a sellerService
   }
 }

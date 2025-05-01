@@ -1,2 +1,10 @@
+import { IsNotEmpty, IsEmail } from 'class-validator';
+
 export class CreateClientDto {
+  @IsNotEmpty()
+  name: string;
+
+  @IsNotEmpty()
+  @IsEmail()
+  mail: string;
 }

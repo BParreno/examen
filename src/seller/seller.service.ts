@@ -1,12 +1,14 @@
 import { Injectable } from '@nestjs/common';
 import { CreateSellerDto } from './dto/create-seller.dto';
 import { UpdateSellerDto } from './dto/update-seller.dto';
-import { PrismaService } from '../prisma/prisma.service';
+import { PrismaService } from '../prisma/prisma.service'; // Importa PrismaService
 
 @Injectable()
 export class SellerService {
+  constructor(private readonly prisma: PrismaService) {} // Inyecta PrismaService
+
   create(createSellerDto: CreateSellerDto) {
-    return this.prisma.seller.create({data:createSellerDto});
+    return this.prisma.seller.create({ data: createSellerDto });
   }
 
   findAll() {
@@ -14,14 +16,14 @@ export class SellerService {
   }
 
   findOne(id: number) {
-    return this.prisma.seller.findUnique({where:{id}});
+    return this.prisma.seller.findUnique({ where: { id } });
   }
 
   update(id: number, updateSellerDto: UpdateSellerDto) {
-    return this.prisma.seller.update({where:{id},data:updateSellerDto});
+    return this.prisma.seller.update({ where: { id }, data: updateSellerDto });
   }
 
   remove(id: number) {
-    return this.prisma.seller.delete({where:{id}});
+    return this.prisma.seller.delete({ where: { id } });
   }
 }

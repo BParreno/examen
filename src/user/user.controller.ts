@@ -1,7 +1,7 @@
 import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
 import { UserService } from './user.service';
 import { CreateUserDto } from './dto/create-user.dto';
-import { UpdateUserDto } from './dto/update-user.dto';
+import { UpdateUserDto } from './dto/update-user.dto'; // Asegúrate de que la importación sea correcta
 
 @Controller('user')
 export class UserController {
@@ -23,12 +23,12 @@ export class UserController {
   }
 
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updateUserDto: UpdateUserDto) {
-    return this.userService.remove(+id);
+  update(@Param('id') id: string, @Body() updateUserDto: UpdateUserDto) { // Corregido a UpdateUserDto
+    return this.userService.update(+id, updateUserDto); // También corregido aquí
   }
 
   @Delete(':id')
   remove(@Param('id') id: string) {
-    return this.userService.update(+id, updateUserDto);
+    return this.userService.remove(+id); // Esto parece ser la intención original
   }
 }
